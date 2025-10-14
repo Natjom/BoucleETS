@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import binom
 
+
 n = 4
 p = 0.7
 
