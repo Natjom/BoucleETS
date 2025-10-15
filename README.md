@@ -1,25 +1,52 @@
 # Bloc ETS – Applications en Python
 
-Ce dossier regroupe quelques exercices réalisés dans le cadre du **bloc ETS** du CESI, autour des **probabilités et statistiques appliquées**.
-L’objectif est de mettre en pratique les notions vues en cours à travers des petits scripts Python exploitant la bibliothèque **`scipy.stats`**.
+Ce dépôt regroupe l'ensemble des exercices et projets réalisés dans le cadre du **bloc ETS** du CESI, 
+autour des **probabilités, statistiques appliquées et théorie des jeux**.
 
-Pour l’instant, les exercices portent sur :
+L'objectif est de mettre en pratique les notions vues en cours à travers des scripts Python 
+exploitant notamment `scipy.stats`, `pandas`, `numpy` et `matplotlib`.
 
-* la distribution binomiale
-* le calcul de risques
+---
 
-Ces scripts permettent de vérifier les résultats théoriques, d’effectuer des calculs précis et, dans certains cas, de visualiser la distribution des probabilités à l’aide de **Matplotlib**.
+## Structure du projet
 
-### Exécution
+    BoucleETS/
+    ├── Statistiques descriptives/
+    │   └── PrositStatDesc.py       
+    ├── Statistiques SI/
+    │   ├── PrositStatiSI.py          
+    │   └── server_usage_data.csv     
+    ├── Théorie des jeux/
+    │   ├── exo_proba.py              
+    │   ├── exo_analyse_risque.py     
+    │   └── exo_equilibre_nash.py      
+    ├── main.py
+    ├── LICENSE
+    └── README.md
 
-Installer les dépendances nécessaires :
+---
+## Installation
 
-```bash
-pip install numpy scipy matplotlib
-```
+### Prérequis
 
-Lancer ensuite les scripts directement :
+- Python 3.8+
+- pip ou virtualenv
 
-```bash
-python [PATH]/[FICHIER].py
-```
+### Dépendances
+
+Installer les bibliothèques nécessaires :
+
+    pip install numpy scipy matplotlib pandas kagglehub
+
+Ou utiliser l'environnement virtuel du projet :
+
+    # Linux/Mac
+    source .venv/bin/activate
+    
+    # Windows
+    .venv\Scripts\activate
+    
+    pip install -r requirements.txt
+
+---
+
