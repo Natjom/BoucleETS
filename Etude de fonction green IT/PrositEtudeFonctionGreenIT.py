@@ -1,6 +1,16 @@
-import unittest
+import csv
+import os
+import time
 
-def trouver_deux_valeurs(s, t):
+def force_brute(s, t):
+    n = len(s)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if s[i] + s[j] == t:
+                return (i, j)
+    return None
+
+def table_hachage(s, t):
     vv = {}
     for i, v in enumerate(s):
         c = t - v
@@ -9,47 +19,38 @@ def trouver_deux_valeurs(s, t):
         vv[v] = i
     return None
 
+def mesurer_temps(func, data, target, reps=100):
+    start = time.time()
+    for _ in range(reps):
+        func(data, target)
+    return (time.time() - start) / reps
 
-class TestTrouverDeuxValeurs(unittest.TestCase):
 
-    def test_paire_existe(self):
-        s = [10, 22, 5, 75, 65, 80]
-        t = 70
-        r = trouver_deux_valeurs(s, t)
-        self.assertIsNotNone(r)
-        i, j = r
-        self.assertEqual(s[i] + s[j], t)
+def charger_donnees_csv(nom_fichier):
+    with open(nom_fichier, newline='') as f:
+        reader = csv.reader(f)
+        next(reader, None)
+        return [int(val) for row in reader for val in row if val.strip().isdigit()]
 
-    def test_aucune_paire(self):
-        s = [1, 2, 3, 4]
-        t = 100
-        r = trouver_deux_valeurs(s, t)
-        self.assertIsNone(r)
 
-    def test_valeurs_negatives(self):
-        s = [-5, 10, 15, -10, 20]
-        t = 5
-        r = trouver_deux_valeurs(s, t)
-        self.assertIsNotNone(r)
-        i, j = r
-        self.assertEqual(s[i] + s[j], t)
 
-    def test_zero_target(self):
-        s = [-1, 0, 1]
-        t = 0
-        r = trouver_deux_valeurs(s, t)
-        self.assertIsNotNone(r)
-        i, j = r
-        self.assertEqual(s[i] + s[j], t)
+def tester_algos(dossier, target=100):
+    fichiers = sorted([f for f in os.listdir(dossier) if f.endswith(".csv")])
+    print(f"{'Fichier':<20} {'Taille':<10} {'Force brute (s)':<20} {'Table hachage (s)':<20}")
+    print("-" * 70)
 
-    def test_duplicats(self):
-        s = [5, 5, 10]
-        t = 10
-        r = trouver_deux_valeurs(s, t)
-        self.assertIsNotNone(r)
-        i, j = r
-        self.assertNotEqual(i, j)
-        self.assertEqual(s[i] + s[j], t)
+    for fichier in fichiers:
+        chemin = os.path.join(dossier, fichier)
+        data = charger_donnees_csv(chemin)
+
+        brute_time = mesurer_temps(force_brute, data, target)
+        force_brute(data, target)
+
+        hash_time = mesurer_temps(table_hachage, data, target)
+        table_hachage(data, target)
+
+        print(f"{fichier:<20} {len(data):<10} {brute_time:<20.6f} {hash_time:<20.6f}")
 
 if __name__ == "__main__":
-    unittest.main()
+    dossier = os.path.join(os.path.dirname(__file__), "GreenIT_data")
+    tester_algos(dossier, target=100)
