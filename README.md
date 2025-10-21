@@ -8,9 +8,17 @@ exploitant notamment `scipy.stats`, `pandas`, `numpy` et `matplotlib`.
 
 ---
 
+
 ## Structure du projet
 
     BoucleETS/
+    ├── Arithmétique et Cryptographie/
+    │   ├── Cesar.py                  
+    │   ├── Cesar en 1 ligne.py    
+    │   └── Rsa.py                    #
+    ├── Etude de fonction green IT/
+    │   ├── PrositEtudeFonctionGreenIT.py
+    │   └── GreenIT_data/
     ├── Statistiques descriptives/
     │   └── PrositStatDesc.py       
     ├── Statistiques SI/
@@ -23,7 +31,6 @@ exploitant notamment `scipy.stats`, `pandas`, `numpy` et `matplotlib`.
     ├── main.py
     ├── LICENSE
     └── README.md
-
 ---
 ## Installation
 
